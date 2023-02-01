@@ -589,6 +589,13 @@ export default function createListComponent({
 
     _onScrollVertical = (event: ScrollEvent): void => {
       const { clientHeight, scrollHeight, scrollTop } = event.currentTarget;
+      // For antd table
+      if (this.props.onHScroll) {
+        const { clientWidth, scrollLeft, scrollWidth } = event.currentTarget;
+        this.props.onHScroll({clientWidth, scrollLeft, scrollWidth});
+      }
+      // End
+
       this.setState(prevState => {
         if (prevState.scrollOffset === scrollTop) {
           // Scroll position may have been updated by cDM/cDU,
